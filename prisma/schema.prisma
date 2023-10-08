@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Reforestation {
+  id            String        @id @default(uuid())
+  name          String
+  image_url     String
+  description   String
+  lat           Float
+  lng           Float
+  location      String
+  dimension     Float
+  user          String
+  created_at    DateTime      @default(now())
+  updated_at    DateTime      @updatedAt
+  planted_trees PlantedTree[]
+}
+
+model PlantedTree {
+  id              String        @id @default(uuid())
+  name            String
+  amount          Int
+  reforestation   Reforestation @relation(fields: [reforestationId], references: [id])
+  reforestationId String
+  created_at      DateTime      @default(now())
+  updated_at      DateTime      @updatedAt
+}

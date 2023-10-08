@@ -1,4 +1,4 @@
-import { MapPin } from "lucide-react";
+import { MapPin, Ruler } from "lucide-react";
 import Link from "next/link";
 
 import { ReforestationModel } from "@/types";
@@ -8,14 +8,8 @@ import { Card } from "../ui";
 export async function ReforestationCard({
   reforestation,
 }: {
-  reforestation: Omit<ReforestationModel, 'trees'>;
+  reforestation: ReforestationModel;
 }) {
-  const image = await fetch(
-    `https://api.unsplash.com/search/photos/?client_id=xkskLOsQbGDeNSZ1Q-3qUIehihaQ4L63-_KD9Qhhsw0&query=${reforestation.locale}&per_page=1`
-  );
-  const imageJson = await image.json();
-  const imageUrl = imageJson.results[0].urls.regular;
-
   return (
     <Link
       href={`/dashboard/reforestations/${reforestation.id}`}
@@ -24,7 +18,7 @@ export async function ReforestationCard({
       <Card.Root className="overflow-hidden hover:bg-accent transition-colors">
         <Card.Header className="p-0">
           <Image
-            src={imageUrl}
+            src={reforestation.image_url}
             alt=""
             className="h-40 object-cover"
             width={500}
@@ -37,10 +31,13 @@ export async function ReforestationCard({
             {reforestation.description}
           </Card.Description>
         </Card.Content>
-        <Card.Footer className="flex items-center justify-between">
-          <p className="flex items-center gap-2 text-sm text-muted-foreground">
-            <MapPin className="w-4 h-4" /> {reforestation.locale}
-          </p>
+        <Card.Footer className="flex items-center gap-2 divide-x divide-muted-foreground/30">
+          <span className="flex items-center gap-2 text-sm text-muted-foreground">
+            <MapPin className="w-4 h-4" /> {reforestation.location}
+          </span>
+          <span className="flex items-center gap-2 text-sm text-muted-foreground pl-2">
+            <Ruler className="w-4 h-4" /> {reforestation.dimension / 1000}m²
+          </span>
         </Card.Footer>
       </Card.Root>
     </Link>

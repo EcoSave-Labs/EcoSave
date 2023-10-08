@@ -3,27 +3,27 @@ import { Card } from "../ui";
 
 const notifications = [
   {
-    title: "Notification 1",
-    value: "Value 1",
-    description: "Description 1",
+    title: "Low Soil Moisture",
+    value: "Low Moisture Alert",
+    description: "Latitude: -23.456, Longitude: -45.789",
     icon: TreeDeciduous,
   },
   {
-    title: "Notification 2",
-    value: "Value 2",
-    description: "Description 2",
+    title: "High Temperature",
+    value: "High Temperature Alert",
+    description: "Latitude: -22.123, Longitude: -46.456",
     icon: TreePine,
   },
   {
-    title: "Notification 3",
-    value: "Value 3",
-    description: "Description 3",
+    title: "Low Temperature",
+    value: "Low Temperature Alert",
+    description: "Latitude: -24.789, Longitude: -47.012",
     icon: Palmtree,
   },
   {
-    title: "Notification 4",
-    value: "Value 4",
-    description: "Description 4",
+    title: "High Humidity",
+    value: "High Humidity Alert",
+    description: "Latitude: -23.001, Longitude: -46.222",
     icon: TentTree,
   },
 ];
@@ -32,14 +32,14 @@ export function NotificationsList() {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       {notifications.map((notification, index) => (
-        <Card.Root key={index}>
+        <Card.Root key={notification.title} className="flex flex-col justify-between">
           <Card.Header className="flex flex-row items-center justify-between space-y-0 pb-2">
             <Card.Title className="text-sm font-medium">
               {notification.title}
             </Card.Title>
             <notification.icon className="w-4 h-4 text-muted-foreground" />
           </Card.Header>
-          <Card.Content>
+          <Card.Content className="h-full flex flex-col justify-between">
             <div className="text-2xl font-bold">{notification.value}</div>
             <p className="text-xs text-muted-foreground">
               {notification.description}

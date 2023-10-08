@@ -8,7 +8,6 @@ import { redirect, usePathname } from "next/navigation";
 
 export function UserIdentification() {
   const { data: session, status } = useSession();
-  const pathname = usePathname();
 
   if (status === "loading") return null;
 
@@ -42,7 +41,7 @@ export function UserIdentification() {
         })
       }
     >
-      SignIn
+      Sign In
     </Button>
   );
 }

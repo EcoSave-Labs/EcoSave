@@ -1,3 +1,5 @@
+import { SignInButton } from "@/components/app/signin-button";
+import { Button } from "@/components/ui";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
@@ -9,8 +11,12 @@ export default async function HomePage() {
   }
 
   return (
-    <div className="container">
-      <h1>TODO: Landing page...</h1>
+    <div className="container flex flex-col items-center justify-center gap-2 min-h-[calc(100vh_-_4.8125rem)]">
+      <h1 className="text-3xl font-bold text-center">Welcome to EcoSave 😀</h1>
+      <p className="text-muted-foreground text-center">
+        Please sign in to continue
+      </p>
+      <SignInButton />
     </div>
   );
 }

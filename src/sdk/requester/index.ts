@@ -26,6 +26,8 @@ export const requester = (
   service.interceptors.response.use(
     (res) => res,
     (error) => {
+      if(typeof window === "undefined") return Promise.reject(error);
+      
       const url = window.location.pathname;
 
       if (

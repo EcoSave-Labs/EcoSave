@@ -1,3 +1,1 @@
-import getRecommendationTree from "./getRecommendationTrees";
-
-export { getRecommendationTree };
+export * from "./getRecommendationTrees";

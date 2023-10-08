@@ -7,7 +7,7 @@ interface IGetRecommendationTreeParams {
   regionSoilMoisture: number;
 }
 
-const getRecommendationTree = async ({
+export const getRecommendationTree = async ({
   regionSize,
   regionSoilMoisture,
 }: IGetRecommendationTreeParams): Promise<ReforestationTreeModel[]> => {
@@ -22,4 +22,3 @@ const getRecommendationTree = async ({
   return data;
 };
 
-export default getRecommendationTree;
