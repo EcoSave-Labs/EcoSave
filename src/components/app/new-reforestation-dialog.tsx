@@ -36,21 +36,23 @@ export function NewReforestationDialog({
     handleSubmit,
     formState: { errors, isSubmitting },
     setValue,
+    reset
   } = useForm<CreateReforestationSchema>({
     resolver: zodResolver(createReforestationSchema),
   });
 
   async function handleCreateReforestation(data: CreateReforestationSchema) {
     await fetch(
-      `http://${
+      `${
         process.env.NEXT_PUBLIC_LOCAL_API_URL || process.env.VERCEL_URL
-      }/api/reforestation-area?user=${session!.user!.email}`,
+      }/api/reforestation-area?user=${process.env.NEXT_PUBLIC_USER_EMAIL}`,
       {
         method: "POST",
         body: JSON.stringify(data),
       }
     );
 
+    reset();
     refresh();
   }
 
@@ -122,9 +124,11 @@ export function NewReforestationDialog({
             <Dialog.Close>
               <Button variant="outline">Cancel</Button>
             </Dialog.Close>
-            <Button disabled={isSubmitting}>
-              {isSubmitting ? "Creating..." : "Create area"}
-            </Button>
+            <Dialog.Close>
+              <Button disabled={isSubmitting}>
+                {isSubmitting ? "Creating..." : "Create area"}
+              </Button>
+            </Dialog.Close>
           </Dialog.Footer>
         </form>
       </Dialog.Content>

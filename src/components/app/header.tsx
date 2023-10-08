@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { ThemeToggle } from "./theme-toggle";
-import { UserIdentification } from "./user-identification";
 
 export function Header() {
   return (
@@ -14,7 +13,6 @@ export function Header() {
           🌱 EcoSave
         </Link>
         <div className="flex gap-2">
-          <UserIdentification />
           <ThemeToggle />
         </div>
       </div>

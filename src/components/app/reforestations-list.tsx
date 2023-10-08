@@ -8,7 +8,7 @@ export async function ReforestationsList() {
   const session = await auth();
 
   const response = await fetch(
-    `http://${
+    `${
       process.env.NEXT_PUBLIC_LOCAL_API_URL || process.env.VERCEL_URL
     }/api/reforestation-area?user=${session!.user!.email}`
   );

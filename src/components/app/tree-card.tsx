@@ -1,7 +1,7 @@
 "use client";
 
 import { ReforestationTreeModel } from "@/types";
-import { TreePine } from "lucide-react";
+import { Network, TreePine } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { TreeDetailsDialog } from "./tree-details-dialog";
@@ -35,12 +35,14 @@ export function TreeCard({ tree, planted, reforestation_id }: TreeCardProps) {
         className="border w-[var(--space)] h-[var(--space)] rounded relative overflow-hidden bg-gradient-to-b from-zinc-900/0 to-zinc-900 text-zinc-300 p-4 flex flex-col items-start justify-end cursor-pointer"
       >
         <h2 className="text-2xl font-bold text-zinc-50">{tree.name}</h2>
-        <p className="text-base">
-          <strong>Type:</strong> {tree.type}
-        </p>
-        <span className="rounded-sm mt-2 text-sm px-2 py-1 bg-zinc-900/50 font-semibold flex gap-1 items-center">
-          <TreePine className="w-3 h-3" /> {planted}/{tree.recommended_quantity}
-        </span>
+        <div className="flex flex-wrap gap-2">
+          <span className="rounded-sm mt-2 text-sm px-2 py-1 bg-emerald-900/50 font-semibold flex gap-1 items-center">
+            <Network className="w-3 h-3" /> {tree.type}
+          </span>
+          <span className="rounded-sm mt-2 text-sm px-2 py-1 bg-zinc-900/50 font-semibold flex gap-1 items-center">
+            <TreePine className="w-3 h-3" /> {planted}/{tree.recommended_quantity}
+          </span>
+        </div>
         {imageUrl && (
           <Image
             src={imageUrl}

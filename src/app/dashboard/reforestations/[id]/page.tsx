@@ -66,7 +66,7 @@ export default function ReforestationPage({ params }: ReforestationPageProps) {
   useEffect(() => {
     (async () => {
       const reforestationResponse = await fetch(
-        `http://${
+        `${
           process.env.NEXT_PUBLIC_LOCAL_API_URL || process.env.VERCEL_URL
         }/api/reforestation-area/${params.id}`
       );

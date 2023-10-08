@@ -2,7 +2,7 @@ import { NotificationsList } from "@/components/app/notifications-list";
 import { ReforestationsList } from "@/components/app/reforestations-list"
 import { HomeIntroduction } from "./reforestations/components/home-introduction";
 
-export default function Home() {
+export default function Dashboard() {
   return (
     <div className="container my-8 flex flex-col gap-6">
       <HomeIntroduction />

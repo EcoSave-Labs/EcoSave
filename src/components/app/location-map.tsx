@@ -28,9 +28,11 @@ function LocationMarker({ onSetLocation }: LocationMapProps) {
       }
     },
     locationfound(e) {
-      setPosition(e.latlng);
-      onSetLocation(e.latlng);
-      map.flyTo(e.latlng, map.getZoom());
+      if(!position) {
+        setPosition(e.latlng);
+        onSetLocation(e.latlng);
+        map.flyTo(e.latlng, map.getZoom());
+      }
     },
   });
 
