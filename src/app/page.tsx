@@ -1,7 +1,7 @@
-import { SignInButton } from "@/components/app/signin-button";
-import { Button } from "@/components/ui";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+
+import { SignInButton } from "@/components/app/signin-button";
 
 export default async function HomePage() {
   const session = await getServerSession();

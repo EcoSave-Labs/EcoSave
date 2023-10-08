@@ -6,11 +6,20 @@ import {
 } from "@/lib/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Dialog, Input, Label } from "../ui";
-import { LocationMap } from "./location-map";
+
+// @ts-ignore
+const LocationMap = dynamic(() => import("./location-map"), {
+  ssr: false,
+});
+
+import { Button } from "../ui/button";
+import { Dialog } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 
 interface NewReforestationDialogProps {
   children: ReactNode;
@@ -21,7 +30,7 @@ export function NewReforestationDialog({
 }: NewReforestationDialogProps) {
   const { data: session } = useSession();
   const { refresh } = useRouter();
-  
+
   const {
     register,
     handleSubmit,
@@ -44,8 +53,6 @@ export function NewReforestationDialog({
 
     refresh();
   }
-
-  if(typeof window === "undefined") return null;
 
   return (
     <Dialog.Root>
@@ -98,12 +105,14 @@ export function NewReforestationDialog({
             </fieldset>
             <fieldset className="grid gap-2 flex-1">
               <Label htmlFor="location">Location</Label>
-              <LocationMap
-                onSetLocation={(location) => {
-                  setValue("lat", location.lat);
-                  setValue("lng", location.lng);
-                }}
-              />
+              {LocationMap && (
+                <LocationMap
+                  onSetLocation={(location) => {
+                    setValue("lat", location.lat);
+                    setValue("lng", location.lng);
+                  }}
+                />
+              )}
               <span className="text-xs text-red-500 min-h-[1rem]">
                 {errors.lat?.message || errors.lng?.message || ""}
               </span>
@@ -122,5 +131,3 @@ export function NewReforestationDialog({
     </Dialog.Root>
   );
 }
-
-export const dynamic = "force-dynamic";

@@ -52,9 +52,7 @@ function LocationMarker({ onSetLocation }: LocationMapProps) {
   );
 }
 
-export function LocationMap({ onSetLocation }: LocationMapProps) {
-  if(typeof window === "undefined") return null;
-  
+export default function LocationMap({ onSetLocation }: LocationMapProps) {
   return (
     <MapContainer
       center={{ lat: 51.505, lng: -0.09 }}

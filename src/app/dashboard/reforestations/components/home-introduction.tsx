@@ -2,10 +2,10 @@
 
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-
-import { NewReforestationDialog } from "@/components/app";
-import { Button } from "@/components/ui";
 import { PlusCircle } from "lucide-react";
+
+import { NewReforestationDialog } from "@/components/app/new-reforestation-dialog";
+import { Button } from "@/components/ui/button";
 
 export function HomeIntroduction() {
   const { data: session, status } = useSession();

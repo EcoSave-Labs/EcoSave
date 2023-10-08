@@ -10,7 +10,9 @@ import {
   Wind,
 } from "lucide-react";
 import { FormEvent, ReactNode, useState } from "react";
-import { Button, Dialog, Input } from "../ui";
+import { Dialog } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 interface TreeDetailsDialogProps {
   tree: ReforestationTreeModel & {

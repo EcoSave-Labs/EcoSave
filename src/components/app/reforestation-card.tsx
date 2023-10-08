@@ -3,7 +3,8 @@ import Link from "next/link";
 
 import { ReforestationModel } from "@/types";
 import Image from "next/image";
-import { Card } from "../ui";
+
+import { Card } from "../ui/card";
 
 export async function ReforestationCard({
   reforestation,

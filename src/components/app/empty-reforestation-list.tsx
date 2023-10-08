@@ -2,8 +2,9 @@
 
 import { PlusCircle } from "lucide-react";
 import Image from "next/image";
-import { NewReforestationDialog } from ".";
-import { Button } from "../ui";
+
+import { NewReforestationDialog } from "./new-reforestation-dialog";
+import { Button } from "../ui/button";
 
 export function EmptyReforestationList() {
   return (

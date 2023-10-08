@@ -4,7 +4,8 @@ import { ScrollContainer } from "react-indiana-drag-scroll";
 import "react-indiana-drag-scroll/dist/style.css";
 
 import { TreeCard } from "@/components/app/tree-card";
-import { Select } from "@/components/ui";
+import { Select } from "@/components/ui/select";
+
 import { getRecommendationTree } from "@/sdk";
 import { ReforestationModel, ReforestationTreeModel } from "@/types";
 import Image from "next/image";

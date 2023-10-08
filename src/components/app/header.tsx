@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-import { ThemeToggle, UserIdentification } from ".";
+import { ThemeToggle } from "./theme-toggle";
+import { UserIdentification } from "./user-identification";
 
 export function Header() {
   return (

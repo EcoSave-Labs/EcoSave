@@ -1,5 +1,5 @@
 import { Palmtree, TentTree, TreeDeciduous, TreePine } from "lucide-react";
-import { Card } from "../ui";
+import { Card } from "../ui/card";
 
 const notifications = [
   {
@@ -31,7 +31,7 @@ const notifications = [
 export function NotificationsList() {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      {notifications.map((notification, index) => (
+      {notifications.map((notification) => (
         <Card.Root key={notification.title} className="flex flex-col justify-between">
           <Card.Header className="flex flex-row items-center justify-between space-y-0 pb-2">
             <Card.Title className="text-sm font-medium">
