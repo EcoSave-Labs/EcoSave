@@ -1,9 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @layer base {
   :root {
@@ -66,5 +63,8 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  html {
+    scrollbar-gutter: stable;
   }
 }
