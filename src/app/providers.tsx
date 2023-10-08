@@ -1,6 +1,6 @@
 "use client";
 
-import { SessionProvider } from "next-auth/react";
+import { SessionContextProvider } from "@/contexts/session-provider";
 import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
 
@@ -16,7 +16,7 @@ export function Providers({ children }: ProvidersProps) {
       enableSystem
       disableTransitionOnChange
     >
-      <SessionProvider>{children}</SessionProvider>
+      <SessionContextProvider>{children}</SessionContextProvider>
     </ThemeProvider>
   );
 }

@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Montserrat } from "next/font/google";
 
 import "./globals.css";
@@ -11,19 +12,14 @@ const font = Montserrat({
   weight: ["400", "500", "600", "700"],
 });
 
-export const metadata: Metadata = {
-  title: "EcoSave",
-  description: "The best way to save the planet",
-};
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={font.className}>
+    <html lang="en">
+      <body className={font.className} suppressHydrationWarning>
         <Providers>
           <Header />
           {children}

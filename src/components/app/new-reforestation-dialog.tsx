@@ -5,10 +5,9 @@ import {
   createReforestationSchema,
 } from "@/lib/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { useForm } from "react-hook-form";
 
 // @ts-ignore
@@ -16,6 +15,7 @@ const LocationMap = dynamic(() => import("./location-map"), {
   ssr: false,
 });
 
+import { useSession } from "@/contexts/session-provider";
 import { Button } from "../ui/button";
 import { Dialog } from "../ui/dialog";
 import { Input } from "../ui/input";
@@ -28,15 +28,16 @@ interface NewReforestationDialogProps {
 export function NewReforestationDialog({
   children,
 }: NewReforestationDialogProps) {
-  const { data: session } = useSession();
+  const { id_hash } = useSession();
   const { refresh } = useRouter();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     setValue,
-    reset
+    reset,
   } = useForm<CreateReforestationSchema>({
     resolver: zodResolver(createReforestationSchema),
   });
@@ -45,19 +46,20 @@ export function NewReforestationDialog({
     await fetch(
       `${
         process.env.NEXT_PUBLIC_LOCAL_API_URL || process.env.VERCEL_URL
-      }/api/reforestation-area?user=${process.env.NEXT_PUBLIC_USER_EMAIL}`,
+      }/api/reforestation-area?user=${id_hash}`,
       {
         method: "POST",
         body: JSON.stringify(data),
       }
     );
 
+    window.location.reload();
     reset();
-    refresh();
+    setIsDialogOpen(false);
   }
 
   return (
-    <Dialog.Root>
+    <Dialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <Dialog.Trigger asChild>{children}</Dialog.Trigger>
       <Dialog.Content>
         <form
@@ -70,7 +72,7 @@ export function NewReforestationDialog({
               Fill the form below to create a new reforestation area.
             </Dialog.Description>
           </Dialog.Header>
-          <div className="grid gap-4">
+          <div className="grid gap-2">
             <fieldset className="grid gap-2 flex-1">
               <Label htmlFor="name">Name</Label>
               <Input
@@ -100,6 +102,8 @@ export function NewReforestationDialog({
                 {...register("dimension")}
                 type="number"
                 placeholder="Insert area dimension in cm²"
+                min={2500}
+                max={15000}
               />
               <span className="text-xs text-red-500 min-h-[1rem]">
                 {errors.dimension?.message || ""}
@@ -122,13 +126,11 @@ export function NewReforestationDialog({
           </div>
           <Dialog.Footer>
             <Dialog.Close>
-              <Button variant="outline">Cancel</Button>
+              <Button variant="outline" type="button">Cancel</Button>
             </Dialog.Close>
-            <Dialog.Close>
               <Button disabled={isSubmitting}>
                 {isSubmitting ? "Creating..." : "Create area"}
               </Button>
-            </Dialog.Close>
           </Dialog.Footer>
         </form>
       </Dialog.Content>

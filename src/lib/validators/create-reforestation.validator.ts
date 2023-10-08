@@ -9,7 +9,8 @@ export const createReforestationSchema = z.object({
   lng: z.number().min(-180, "Longitude must be at least -180").max(180, "Longitude must be at most 180"),
   dimension: z.coerce
     .number()
-    .min(1000, "Dimension must be at least 1 meter square"),
+    .min(2500, "Dimension must be at least 2.500 m²")
+    .max(15000, "Dimension must be at most 15.000 m²"),
 });
 
 export type CreateReforestationSchema = z.infer<

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/database";
 import { NextRequest, NextResponse } from "next/server";
 
 interface ReforestationAreaContext {
@@ -6,8 +6,6 @@ interface ReforestationAreaContext {
     id: string;
   };
 }
-
-const prisma = new PrismaClient();
 
 export async function GET(
   request: NextRequest,

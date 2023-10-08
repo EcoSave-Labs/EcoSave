@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/database";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError, z } from "zod";
-
-const prisma = new PrismaClient();
 
 async function fetchLocationName(lat: number, lng: number) {
   const locationResponse = await fetch(
@@ -22,7 +20,9 @@ async function fetchLocationName(lat: number, lng: number) {
 
 async function fetchLocationImage(location: string) {
   const imageResponse = await fetch(
-    `https://api.unsplash.com/search/photos/?client_id=xkskLOsQbGDeNSZ1Q-3qUIehihaQ4L63-_KD9Qhhsw0&query=${location.split(",")[1]}&per_page=1`
+    `https://api.unsplash.com/search/photos/?client_id=xkskLOsQbGDeNSZ1Q-3qUIehihaQ4L63-_KD9Qhhsw0&query=${
+      location.split(",")[1]
+    }&per_page=1`
   );
   const imageJson = await imageResponse.json();
   return imageJson.results[0].urls.regular;

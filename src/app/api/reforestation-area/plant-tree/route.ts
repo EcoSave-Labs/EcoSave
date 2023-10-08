@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/database";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-
-const prisma = new PrismaClient();
 
 export async function PUT(request: NextRequest) {
   const bodySchema = z.object({
@@ -28,7 +26,7 @@ export async function PUT(request: NextRequest) {
     )
     .catch(() => null);
 
-    console.log({ plantedTree })
+  console.log({ plantedTree });
   if (plantedTree) {
     await prisma.plantedTree.update({
       where: {

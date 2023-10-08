@@ -17,42 +17,6 @@ interface ReforestationPageProps {
   };
 }
 
-const reforestation = {
-  id: 1,
-  name: "Forest 1",
-  description: "Description 1",
-  image: "https://cdn.pixabay.com/photo/2012/09/15/02/22/forest-56930_1280.jpg",
-  locale: "São Paulo",
-  trees: [
-    {
-      id: 13,
-      name: "Pine",
-      type: "Tree",
-      grow_space: 300,
-      germination_time: 1,
-      time_to_adulthood: 1,
-      gas_ch4_reduction: 1,
-      ideal_soil_moisture: 1,
-      gas_c02_reduction: 1,
-      recommended_quantity: 1,
-      cluster: 1,
-    },
-    {
-      id: 13,
-      name: "Eucalyptus",
-      type: "Tree",
-      grow_space: 200,
-      germination_time: 1,
-      time_to_adulthood: 1,
-      gas_ch4_reduction: 1,
-      ideal_soil_moisture: 1,
-      gas_c02_reduction: 1,
-      recommended_quantity: 1,
-      cluster: 1,
-    },
-  ],
-};
-
 const soilMoistureOptions = [60, 65, 70, 75];
 
 export default function ReforestationPage({ params }: ReforestationPageProps) {
@@ -132,7 +96,7 @@ export default function ReforestationPage({ params }: ReforestationPageProps) {
       {soilMoisture ? (
         <ScrollContainer>
           <div className="flex h-[var(--size)] w-[var(--size)] flex-wrap gap-2 p-2 border rounded-md">
-            {recommendedTrees.map((tree) => (
+            {recommendedTrees.length > 0 ? recommendedTrees.map((tree) => (
               <TreeCard
                 tree={tree}
                 key={tree.id}
@@ -143,7 +107,9 @@ export default function ReforestationPage({ params }: ReforestationPageProps) {
                   )?.amount || 0
                 }
               />
-            ))}
+            )) : (
+              <h3 className="text-xl text-center w-full">Loading...</h3>
+            )}
           </div>
         </ScrollContainer>
       ) : (

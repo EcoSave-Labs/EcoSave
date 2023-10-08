@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import { Card } from "../ui/card";
 
-export async function ReforestationCard({
+export function ReforestationCard({
   reforestation,
 }: {
   reforestation: ReforestationModel;
